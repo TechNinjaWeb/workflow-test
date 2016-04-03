@@ -1,0 +1,30 @@
+{
+  "name": "polymer-test",
+  "version": "0.0.0",
+  "authors": [
+    "TechNinja | Web & IT"
+  ],
+  "description": "testing polymer angular browserify and gulp workflow",
+  "main": "gulpfile.js",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "license": "SEE LICENSE IN ./license.file",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "google-map": "GoogleWebComponents/google-map#~1.1.10",
+    "polymer": "Polymer/polymer#~1.4.0",
+    "iron-elements": "polymerelements/iron-elements#~1.0.9",
+    "font-awesome": "~4.5.0",
+    "polymer-js": "~1.0.5"
+  }
+}

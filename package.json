@@ -1,0 +1,37 @@
+{
+  "name": "polymer-test",
+  "version": "1.0.0",
+  "description": "testing polymer angular browserify and gulp workflow",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "author": "TechNinja | Web & IT",
+  "license": "SEE LICENSE IN ./license.file",
+  "dependencies": {
+    "angular": "^1.5.3",
+    "angular-resource": "^1.5.3",
+    "angular-ui-router": "^0.2.18",
+    "bower": "^1.7.7",
+    "browserify-bower": "^0.6.0",
+    "debowerify": "^1.4.1",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "jquery": "^2.2.2",
+    "toastr": "^2.1.2"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.11.2",
+    "browserify": "^13.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-streamify": "^1.0.2",
+    "gulp-vulcanize": "^6.1.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  }
+}
