@@ -46,3 +46,4 @@ www/.bower-registry
 www/.bower-tmp
 
 ### Custom Modules ###
+private
