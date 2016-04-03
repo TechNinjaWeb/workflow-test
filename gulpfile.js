@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var imagemin = require('gulp-imagemin');
 var watchify = require('watchify');
 var browserify = require('browserify');
+var shim = require('browserify-shim');
 var gulpify = require('gulp-browserify');
 var sync = require('browser-sync');
 var source = require('vinyl-source-stream');
@@ -22,7 +23,8 @@ var paths = {
         html: 'www/build/html/*.html'
     },
     bower: 'www/bower_components/',
-    node: 'node_modules/'
+    node: 'node_modules/',
+    root: 'www/'
 };
 // Primary Build Task
 gulp.task('sync', ['build'], function() {
@@ -38,16 +40,46 @@ gulp.task('sync', ['build'], function() {
         },
         shim: {
 		    angular: {
-                path: node + '/angular.js',
-                exports: 'angular'
+                path: paths.node + 'angular/angular.js',
+                exports: 'angular',
+                depends: {
+                    '$': 'jquery'
+                }
 		    },
             'angular-route': {
-                path: '/vendor/angular-route/angular-route.js',
-                exports: 'ngRoute',
+                path: paths.node + 'angular-ui-router/release/angular-ui-router.js',
+                exports: 'ui.router',
                 depends: {
-                    angular: 'angular'
+                    'angular': 'angular'
                 }
+            },
+            'angular-resource': {
+                path: paths.node + 'angular-resource/release/angular-resource.js',
+                exports: 'ngResource',
+                depends: {
+                    'angular-resource': 'angular'
+                }
+            },
+            jquery: {
+                path: paths.node + 'jquery/dist/jquery.js',
+                exports: ['jQuery', '$']
+            },
+            toastr: {
+                path: paths.node + 'toastr/toastr.js',
+                exports: 'toastr'
+            },
+            constants: {
+                path: './constants.js',
+                exports: '_config'
+            },
+            components: {
+                path: paths.root + 'components',
+                exports: 'tn-web-components'
+            },
+            polymer: {
+                path: paths.bower + 'polymer-js'
             }
+            
         }
     });
 });
@@ -137,12 +169,15 @@ gulp.task('ugly-html', ['clean'], function() {
 
 
 gulp.task('watch', ['sync'], function () {
-    gulp.watch(['./gulpfile.js'], ['default']);
-    gulp.watch(paths.scripts, ['scripts']);
-    gulp.watch(paths.images, ['images']);
-    gulp.watch([paths.html, 'www/components/**/*', 'www/index.html'], ['html']);
+    gulp.watch(['./gulpfile.js'], ['scripts', 'reload']);
+    gulp.watch(paths.scripts, ['scripts', 'reload']);
+    gulp.watch(paths.images, ['images', 'reload']);
+    gulp.watch([paths.html, 'www/components/**/*', 'www/index.html'], ['html', 'reload']);
 });
 
+gulp.task('reload', function (){
+    sync.reload();
+});
 
 gulp.task('build', ['scripts', 'html', 'images', 'ugly-js', 'ugly-html']);
 gulp.task('default', ['sync', 'watch']);
